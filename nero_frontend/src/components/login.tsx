@@ -5,8 +5,8 @@ import Image from "next/image";
 import Nero from '@/images/nero.png'
 import Link from "next/link";
 import api from '@/lib/api'
+import GoogleLoginButton from "@/components/googleLoginbtn";
 import '../app/globals.css'
-import GoogleLoginButton from "./googleLoginbtn";
 
 export default function Login() {
     const router = useRouter();
@@ -91,17 +91,16 @@ export default function Login() {
                         >
                             Login
                         </button>
-
-                        <div className="mt-4 text-sm text-black dark:text-white">
-                            Don't have an account? <Link href="/register" className="text-cyan-500 hover:underline">Register</Link>
-                        </div>
-                        <div className="w-full flex itesm-center justyfy-conter">
-                            <span className=" border-b border-gray-300 w-[50%]"></span>
-                            <span className="text-md text-center">or</span>
-                            <span className="border-b border-b-gray-300 w-[50%]"></span>
-                        </div>
-                        <GoogleLoginButton/>
                     </form>
+                    <div className="mt-4 text-sm text-black dark:text-white">
+                        Don't have an account? <Link href="/register" className="text-cyan-500 hover:underline">Register</Link>
+                    </div>
+                    <div className="w-full flex itesm-center justyfy-conter">
+                        <span className=" border-b border-gray-300 w-[50%]"></span>
+                        <span className="text-md text-center">or</span>
+                        <span className="border-b border-b-gray-300 w-[50%]"></span>
+                    </div>
+                    <GoogleLoginButton />
                 </div>
             </div>
         </div>

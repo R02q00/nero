@@ -8,7 +8,8 @@ export default function Theme() {
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
-    setMounted(true)
+    setMounted(true);
+    
   }, [])
 
   if (!mounted) {
@@ -21,11 +22,7 @@ export default function Theme() {
       className="p-2 rounded-md focus:outline-none"
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? (
-        <SunIcon className="h-5 w-5 text-yellow-400" />
-      ) : (
-        <MoonIcon className="h-5 w-5 text-gray-800" />
-      )}
+      {theme === 'dark' ? (<SunIcon className="h-5 w-5 dark:text-white" />) : (<MoonIcon className="h-5 w-5 dark:text-white" />)}
     </button>
   )
 }
