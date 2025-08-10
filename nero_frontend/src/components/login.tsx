@@ -51,6 +51,7 @@ export default function Login() {
                         className="animate-custom-bounce"
                     />
                     <p className="text-center text-black dark:text-white">Hi, I'm <span className="font-bold text-cyan-500">Nero</span><br />
+
                     </p>
                 </div>
                 <div className="w-75">

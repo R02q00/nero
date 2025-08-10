@@ -22,8 +22,13 @@ export default function Home() {
     return (
         <div className="min-h-screen bg-gray-100 p-4 bg-white dark:bg-gray-900">
             <div className='flex justify-between'>
-                <h1 className='text-xl text-black dark:text-white font-bold'>Nero</h1>
+                <h1 className='text-xl text-black dark:text-white'>AV</h1>
                 <ThemeToggle />
+            </div>
+            <div className='flex justify-center items-center'>
+                <p className='text-2xl'>
+                    Welcome to <span className='text-cyan-500 font-bold'>Nero</span>
+                </p>
             </div>
             {/*
             <div className="">
