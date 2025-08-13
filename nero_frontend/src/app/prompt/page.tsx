@@ -1,46 +1,75 @@
 'use client'
-import Home from '@/components/home'
-import { useState } from 'react';
+import { useState } from "react";
 
-export default function PromptPage() {
-    const [prompt, setPrompt] = useState("");
-    const [reply, setReply] = useState("");
+export default function ChatComponent() {
+    const [prompt, setPrompt] = useState('');
+    const [messages, setMessages] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const sendPrompt = async () => {
-        const response = await fetch("/api/chat/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt })
-        })
-        const data = await response.json();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
 
-        setReply(data.reply || "Erreur")
-    }
+        const userMessage = { role: 'user', content: prompt };
+        const newMessages = [...messages, userMessage];
+
+        setMessages(newMessages);
+        setPrompt('');
+
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ messages: newMessages }),
+            });
+
+            if (!response.ok) {
+                const errText = await response.text();
+                console.error("Server error:", errText);
+                return;
+            }
+
+            const data = await response.json();
+            console.log("data:", data);
+            setMessages([...newMessages, { role: 'assistant', content: data.response }]);
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
-        <div className=''>
-            <h1 className='text-center font-bold'>Type anything and send!</h1>
-            <div className='px-4'>
-                <p>
-                    {reply}
-                </p>
+        <div className="h-[100vh] relative dark:bg-gray-900">
+            <div className="mx-20">
+                {messages.map((msg, idx) => (
+                    <div key={idx} className={msg.role}>
+                        {msg.content}
+                    </div>
+                ))}
             </div>
-            <div className='flex flex-col rounded-lg p-4 border'>
+            <form onSubmit={handleSubmit} className="absolute bottom-4 md:translate-x-1/6 w-full md:w-[75%] flex flex-col gap-2 border rounded-md p-4">
                 <textarea
-                    name="prompt"
-                    id="prompt"
-                    className='rounded-lg'
-                    placeholder='Ask anything'
                     value={prompt}
+                    placeholder="Ask anything"
                     onChange={(e) => setPrompt(e.target.value)}
-                ></textarea>
-                <div className='flex justify-end mt-4'>
-                    <button onClick={sendPrompt} className='border px-4 rounded-lg text-cyan-500'>
-                        Send
+                    className="outline-none"
+                    disabled={isLoading}
+                    required
+                />
+                <div className="flex justify-end">
+                    <button
+                        type="submit"
+                        disabled={isLoading}
+                        className="px-4 py-1 text-cyan-500 border border-cyan-500 rounded-md"
+                    >
+                        {isLoading ? 'Sending...' : 'Send'}
                     </button>
                 </div>
 
-            </div>
-
+            </form>
         </div>
     );
 }

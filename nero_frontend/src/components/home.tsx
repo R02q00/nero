@@ -20,14 +20,15 @@ export default function Home() {
     }, [loading, user, router])
 
     return (
-        <div className="min-h-screen bg-gray-100 p-4 bg-white dark:bg-gray-900">
+        <div className="h-[100vh] bg-gray-100 p-4 bg-white dark:bg-gray-900">
             <div className='flex justify-between'>
                 <h1 className='text-xl text-black dark:text-white'>AV</h1>
                 <ThemeToggle />
             </div>
-            <div className='flex justify-center items-center'>
-                <p className='text-2xl'>
-                    Welcome to <span className='text-cyan-500 font-bold'>Nero</span>
+            <div>
+                <p className='text-center'>
+                    Welcome to <span className='text-cyan-500 font-bold'>Nero</span><br />
+                    I'am a simple AI assistant, you can ask me anything.
                 </p>
             </div>
             {/*
