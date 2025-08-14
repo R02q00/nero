@@ -1,11 +1,12 @@
 'use client'
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Nero from '@/images/nero.png'
 import Link from "next/link";
 import api from '@/lib/api'
 import GoogleLoginButton from "@/components/googleLoginbtn";
+import useUser from "@/hook/useUser";
 import '../app/globals.css'
 
 export default function Login() {
@@ -15,7 +16,7 @@ export default function Login() {
         password: ''
     });
     const [error, setError] = useState('')
-
+    const { user } = useUser();
     const handleChange = (e: any) => {
         const { name, value } = e.target;
         setCredentials(prev => ({ ...prev, [name]: value }));
@@ -39,7 +40,11 @@ export default function Login() {
         }
     };
 
-
+    useEffect(()=>{
+        if(user){
+            router.push('/home')
+        }
+    },[user])
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
             <div className="bg-white dark:bg-gray-800 rounded-lg px-8 py-6 grid md:grid-cols-2 gap-3 shadow-md">

@@ -42,7 +42,7 @@ export default function PromptPage() {
 
     return (
         <div className="dark:bg-gray-900">
-            <div className="mx-20">
+            <div className="mx-5 md:mx-20">
                 {messages.map((msg, idx) => (
                     <div key={idx} className={`p-2 my-2 rounded-lg ${msg.role === 'user' ? 'text-right' : 'text-left'}`}>
                         {msg.content}
