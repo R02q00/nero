@@ -32,7 +32,6 @@ export default function ChatComponent() {
             }
 
             const data = await response.json();
-            console.log("data:", data);
             setMessages([...newMessages, { role: 'assistant', content: data.response }]);
         } catch (error) {
             console.error('Error:', error);
@@ -45,31 +44,31 @@ export default function ChatComponent() {
         <div className="h-[100vh] relative dark:bg-gray-900">
             <div className="mx-20">
                 {messages.map((msg, idx) => (
-                    <div key={idx} className={msg.role}>
+                    <div key={idx} className={`p-2 my-2 rounded-lg ${msg.role === 'user' ? 'text-right' : ''}`}>
                         {msg.content}
                     </div>
                 ))}
             </div>
-            <form onSubmit={handleSubmit} className="absolute bottom-4 md:translate-x-1/6 w-full md:w-[75%] flex flex-col gap-2 border rounded-md p-4">
-                <textarea
-                    value={prompt}
-                    placeholder="Ask anything"
-                    onChange={(e) => setPrompt(e.target.value)}
-                    className="outline-none"
-                    disabled={isLoading}
-                    required
-                />
-                <div className="flex justify-end">
-                    <button
-                        type="submit"
+                <form onSubmit={handleSubmit} className="absolute bottom-4 md:translate-x-1/6 w-full md:w-[75%] flex flex-col gap-2 border rounded-md p-4">
+                    <textarea
+                        value={prompt}
+                        placeholder="Ask anything"
+                        onChange={(e) => setPrompt(e.target.value)}
+                        className="outline-none"
                         disabled={isLoading}
-                        className="px-4 py-1 text-cyan-500 border border-cyan-500 rounded-md"
-                    >
-                        {isLoading ? 'Sending...' : 'Send'}
-                    </button>
-                </div>
+                        required
+                    />
+                    <div className="flex justify-end">
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className="px-4 py-1 text-cyan-500 border border-cyan-500 rounded-md"
+                        >
+                            {isLoading ? 'Sending...' : 'Send'}
+                        </button>
+                    </div>
 
-            </form>
+                </form>
         </div>
     );
 }

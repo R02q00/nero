@@ -1,4 +1,4 @@
-import { getInferenceResponse } from '@/services/inferenceService';
+import { getInferenceResponse } from '@/services/inferenceService.js';
 
 export async function POST(req) {
   try {
@@ -9,7 +9,7 @@ export async function POST(req) {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
-    
+
   } catch (error) {
     console.error('Error:', error);
     return new Response(JSON.stringify({ error: 'Internal server error' }), {

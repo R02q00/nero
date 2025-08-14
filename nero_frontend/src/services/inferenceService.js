@@ -2,7 +2,7 @@ import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
 import { AzureKeyCredential } from "@azure/core-auth";
 
 const endpoint = "https://models.github.ai/inference";
-const model = "github/gpt-4o-mini";
+const model = "gpt-4o";
 const token = process.env.GITHUB_TOKEN;
 
 export async function getInferenceResponse(messages) {
