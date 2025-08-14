@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 
-export default function ChatComponent() {
+export default function PromptPage() {
     const [prompt, setPrompt] = useState('');
     const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -41,14 +41,15 @@ export default function ChatComponent() {
     };
 
     return (
-        <div className="h-[100vh] relative dark:bg-gray-900">
+        <div className="dark:bg-gray-900">
             <div className="mx-20">
                 {messages.map((msg, idx) => (
-                    <div key={idx} className={`p-2 my-2 rounded-lg ${msg.role === 'user' ? 'text-right' : ''}`}>
+                    <div key={idx} className={`p-2 my-2 rounded-lg ${msg.role === 'user' ? 'text-right' : 'text-left'}`}>
                         {msg.content}
                     </div>
                 ))}
             </div>
+            <div className="">
                 <form onSubmit={handleSubmit} className="absolute bottom-4 md:translate-x-1/6 w-full md:w-[75%] flex flex-col gap-2 border rounded-md p-4">
                     <textarea
                         value={prompt}
@@ -69,6 +70,8 @@ export default function ChatComponent() {
                     </div>
 
                 </form>
+            </div>
+
         </div>
     );
 }

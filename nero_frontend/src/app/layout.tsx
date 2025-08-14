@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { GoogleProvider } from "@/components/googleProvider";
+import { Header } from "@/components/header";
 import "./globals.css";
 
 const inter = Inter({ subsets: ['latin'] });
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Header />
           <GoogleProvider>
             {children}
           </GoogleProvider>
